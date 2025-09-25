@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMKN 10 Semarang - Jurusan Manajemen Logistik</title>
+    <link rel="shortcut icon" href="kul.png" type="image/x-icon">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            /* Styles for page transition */
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+        /* Class to trigger fade-in */
+        body.fade-in {
+            opacity: 1;
+        }
+
+        /* Custom styles for horizontal scrolling */
+        .testimonial-carousel {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+        }
+        .testimonial-carousel::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
+        }
+        /* Adjusted width for a taller, more compact card */
+        .testimonial-card {
+            width: 20rem; /* Fixed width */
+            flex-shrink: 0;
+            scroll-snap-align: center;
+        }
+        @media (min-width: 768px) {
+            .testimonial-card {
+                width: 22rem; /* Wider on desktop */
+            }
+        }
+
+        /* Fade-up animation styles */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Hamburger to X animation */
+        #mobile-menu-button .line {
+            transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+            transform-origin: center;
+        }
+        #mobile-menu-button.open .top {
+            transform: translateY(6px) rotate(45deg);
+        }
+        #mobile-menu-button.open .middle {
+            opacity: 0;
+        }
+        #mobile-menu-button.open .bottom {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+    </style>
+</head>
+<body class="bg-[#F5F0E1] text-[#1A3A5D] antialiased overflow-x-hidden">
+
+    <!-- Updated Navigation Header - Fixed at the top -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#1A3A5D] shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-2">
+                <img src="kul.png" alt="SMKN 10 Logo" class="w-10 h-10 square-full" />
+                <h1 class="text-xl font-bold text-white">SMKN 10 Semarang</h1>
+            </div>
+            
+            <!-- Navigation Links (Hidden on small screens) -->
+            <nav id="desktop-menu" class="hidden lg:flex items-center space-x-6 text-white font-medium">
+                <a href="web.html" class="nav-link hover:text-gray-300 transition-colors duration-200">Beranda</a>
+                <a href="profil.html" class="nav-link hover:text-gray-300 transition-colors duration-200">Profil Guru</a>
+                <!-- Tautan internal halaman seperti #facilities bisa ditambahkan kembali di sini jika perlu -->
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path class="line top" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16"></path>
+                    <path class="line middle" stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path>
+                    <path class="line bottom" stroke-linecap="round" stroke-linejoin="round" d="M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-[#1A3A5D]">
+            <nav class="flex flex-col p-4 space-y-2 text-white font-medium">
+                <!-- Links are cloned here by JS -->
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative flex items-center justify-center h-screen bg-cover bg-center bg-[#1A3A5D] text-white" style="background-image: url('log.jpg');">
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="container mx-auto px-4 text-center z-10 space-y-6">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight fade-up">
+                    Siap Kuasai Masa Depan Logistik?
+                </h2>
+                <h3 class="text-2xl sm:text-3xl font-light max-w-3xl mx-auto fade-up">
+                    Pilih Jurusan <span class="text-[#CC3333] font-semibold">Manajemen Logistik</span> di SMKN 10 Semarang!
+                </h3>
+                <p class="max-w-xl mx-auto text-lg text-gray-300 fade-up">
+                    Satu-satunya jurusan Manajemen Logistik di Semarang dengan prospek kerja menjanjikan dan kurikulum relevan industri.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4 fade-up">
+                    <!-- Tombol "Daftar Sekarang PPDB 2024/2025" dihapus sesuai permintaan -->
+                    <a href="#what-you-will-learn" class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-full text-white hover:bg-white hover:text-[#1A3A5D] transition-all duration-200">
+                        Pelajari Selengkapnya
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-choose-us" class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-12 fade-up">
+                    <span class="text-[#CC3333] text-xl font-semibold uppercase">Mengapa Memilih Kami?</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-[#1A3A5D]">
+                        Pilihan Tepat untuk Masa Depan Cerah
+                    </h2>
+                </div>
+                
+                <div class="mb-16">
+                    <div class="bg-[#F5F0E1]/50 p-8 rounded-2xl shadow-md transition-transform duration-300 hover:scale-105 fade-up">
+                        <h3 class="text-2xl font-semibold mb-4 text-center text-[#1A3A5D]"> Apa itu Jurusan Manajemen Logistik?</h3>
+                        <p class="text-lg text-gray-600 text-justify">
+Jurusan Manajemen Logistik adalah jurusan yang bergerak di bidang pengelolaan logistik. Di jurusan ini, siswa akan mempelajari berbagai hal yang berkaitan dengan manajemen distribusi, manajemen pergudangan (warehouse), pengolahan data (barang masuk dan barang keluar), hingga bagian ekspedisi. Selain itu, jurusan ini juga membekali siswa dengan keterampilan di bidang pengadaan barang, mulai dari perencanaan, pemesanan, proses produksi, sampai dengan distribusi dan pengiriman barang kepada konsumen. Indonesia membutuhkan SDM logistik yang terampil. Jurusan Manajemen Logistik SMKN 10 Semarang menyiapkanmu menjadi ahli yang kompeten dan siap bersaing di industri.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm text-center transform transition-transform duration-300 hover:scale-105 fade-up">
+                        <div class="p-4 bg-[#1A3A5D] text-white rounded-full inline-block mb-4 shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck"><path d="M10 17h11.23a2 2 0 0 0 1.95-2.52L20.5 5H6l-3 4v7a2 2 0 0 0 2 2h2" /><circle cx="7" cy="17" r="2" /><path d="M12 18.5V10h5.5c.34 0 .68.04 1 .11V6.5a2.5 2.5 0 0 1 2.5-2.5v0A2.5 2.5 0 0 1 23 6.5v12.28a2 2 0 0 0-.28-.52l-.65-.96" /><circle cx="17" cy="17" r="2" /></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-[#1A3A5D]">Pelopor di Semarang</h4>
+                        <p class="text-gray-600">
+                            Kami adalah satu-satunya Jurusan Manajemen Logistik di kota Semarang.
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm text-center transform transition-transform duration-300 hover:scale-105 fade-up">
+                        <div class="p-4 bg-[#1A3A5D] text-white rounded-full inline-block mb-4 shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-[#1A3A5D]">Prospek Karir Menjanjikan</h4>
+                        <p class="text-gray-600">
+                            Siap menjadi Analis Logistik, Manager Supply Chain, hingga Konsultan Bea Cukai.
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm text-center transform transition-transform duration-300 hover:scale-105 fade-up">
+                        <div class="p-4 bg-[#1A3A5D] text-white rounded-full inline-block mb-4 shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" /></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2 text-[#1A3A5D]">Kurikulum Komprehensif</h4>
+                        <p class="text-gray-600">
+                            Gabungan teori dan praktik yang relevan dengan kebutuhan industri masa kini.
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center mt-8 fade-up">
+                    <p class="text-lg font-medium text-gray-700">
+                        <span class="font-bold text-[#1A3A5D]">Jurusan ini cocok untuk pelajar putra dan putri anda!</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What You Will Learn Section -->
+        <section id="what-you-will-learn" class="py-20 bg-[#1A3A5D] text-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-12 fade-up">
+                    <h2 class="text-3xl sm:text-4xl font-bold">
+                        Apa yang Akan Kamu Pelajari?
+                    </h2>
+                    <p class="text-lg mt-2 text-[#F5F0E1] max-w-2xl mx-auto">
+                        Kurikulum kami dirancang untuk membekali Anda dengan pengetahuan dan keterampilan praktis.
+                    </p>
+                </div>
+                <div id="learn-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Content will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Facilities Section -->
+        <section id="facilities" class="py-20 bg-[#F5F0E1]">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-12 fade-up">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-[#1A3A5D]">
+                        Fasilitas & Lingkungan Belajar
+                    </h2>
+                </div>
+                <div id="facility-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <!-- Content will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Prospects Section -->
+        <section id="prospects" class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="bg-[#1A3A5D] text-white p-10 rounded-2xl shadow-xl text-center fade-up">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+                        Satu-satunya di Semarang, Dibutuhkan di Mana Saja
+                    </h2>
+                    <p class="text-lg max-w-3xl mx-auto text-gray-300">
+                        Di Kota Semarang, hanya SMKN 10 yang memiliki jurusan Manajemen Logistik, sehingga peminatnya cukup tinggi. Selain itu, hampir semua perusahaan baik pemerintah maupun swasta membutuhkan tenaga kerja yang berkaitan dengan bidang logistik. Hal ini menjadikan jurusan Manajemen Logistik sebagai salah satu pilihan yang prospektif dan sangat dibutuhkan di dunia kerja.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collaboration Section -->
+        <section id="collaboration" class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-12 fade-up">
+                    <span class="text-[#CC3333] text-xl font-semibold uppercase">Kolaborasi Industri</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-[#1A3A5D]">
+                        Berkolaborasi dengan Industri Ternama
+                    </h2>
+                    <p class="text-lg mt-2 text-gray-600 max-w-3xl mx-auto">
+                        Kami menjalin kemitraan strategis dengan perusahaan terkemuka untuk memastikan kurikulum yang relevan dan peluang magang terbaik bagi siswa.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center fade-up">
+                    <!-- Logo 1 -->
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/150x80/e2e8f0/64748b?text=Logo+Industri" alt="Logo Industri 1" class="grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
+                    </div>
+                    <!-- Logo 2 -->
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/150x80/e2e8f0/64748b?text=Logo+Industri" alt="Logo Industri 2" class="grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
+                    </div>
+                    <!-- Logo 3 -->
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/150x80/e2e8f0/64748b?text=Logo+Industri" alt="Logo Industri 3" class="grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
+                    </div>
+                    <!-- Logo 4 -->
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/150x80/e2e8f0/64748b?text=Logo+Industri" alt="Logo Industri 4" class="grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
+                    </div>
+                    <!-- Logo 5 -->
+                    <div class="flex justify-center">
+                        <img src="https://placehold.co/150x80/e2e8f0/64748b?text=Logo+Industri" alt="Logo Industri 5" class="grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Prospects Section -->
+        <section id="career-prospects" class="py-20 bg-[#F5F0E1]">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-12 fade-up">
+                    <span class="text-[#CC3333] text-xl font-semibold uppercase">Prospek Karir</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-[#1A3A5D]">
+                        Peluang Karir Lulusan
+                    </h2>
+                    <p class="text-lg mt-2 text-gray-600 max-w-2xl mx-auto">
+                        Lulusan kami siap mengisi berbagai posisi strategis di industri logistik dan rantai pasok.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Career Card 1 -->
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 fade-up grid grid-cols-1 md:grid-cols-3">
+                        <img src="analisis.jpg" alt="Analis Logistik" class="w-full h-48 md:h-full object-cover md:col-span-1 bg-gray-200" loading="lazy" decoding="async" width="400" height="400">
+                        <div class="p-6 flex flex-col md:col-span-2">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="text-xl font-bold text-[#1A3A5D] pr-4">Analis Logistik</h4>
+                                <span class="text-lg font-semibold text-[#CC3333] whitespace-nowrap">Rp 5-8jt</span>
+                            </div>
+                            <p class="text-gray-600 text-sm">Bertanggung jawab atas analisis proses pengiriman produk dan rantai pasokan, serta mengelola aktivitas rute termasuk fakturasi, tagihan elektronik, dan pelacakan pengiriman.</p>
+                        </div>
+                    </div>
+                    <!-- Career Card 2 -->
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 fade-up grid grid-cols-1 md:grid-cols-3">
+                        <img src="manajer.jpg" alt="Manajer Rantai Pasok" class="w-full h-48 md:h-full object-cover md:col-span-1 bg-gray-200" loading="lazy" decoding="async" width="400" height="400">
+                        <div class="p-6 flex flex-col md:col-span-2">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="text-xl font-bold text-[#1A3A5D] pr-4">Manajer Rantai Pasok</h4>
+                                <span class="text-lg font-semibold text-[#CC3333] whitespace-nowrap">Rp 10-20jt</span>
+                            </div>
+                            <p class="text-gray-600 text-sm">Mengawasi rantai pasokan dan strategi logistik, serta mengelola operasi untuk meningkatkan efisiensi dan produktivitas, dengan peran penting dalam membangun dan memelihara hubungan dengan vendor dan distributor.</p>
+                        </div>
+                    </div>
+                    <!-- Career Card 3 -->
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 fade-up grid grid-cols-1 md:grid-cols-3">
+                        <img src="teknik.jpg" alt="Ahli Teknik Transportasi" class="w-full h-48 md:h-full object-cover md:col-span-1 bg-gray-200" loading="lazy" decoding="async" width="400" height="400">
+                        <div class="p-6 flex flex-col md:col-span-2">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="text-xl font-bold text-[#1A3A5D] pr-4">Ahli Teknik Transportasi</h4>
+                                <span class="text-lg font-semibold text-[#CC3333] whitespace-nowrap">Rp 6-10jt</span>
+                            </div>
+                            <p class="text-gray-600 text-sm">Spesialis dalam mengembangkan rencana transportasi yang memenuhi standar industri.</p>
+                        </div>
+                    </div>
+                    <!-- Career Card 4 -->
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 fade-up grid grid-cols-1 md:grid-cols-3">
+                        <img src="bea.jpg" alt="Konsultan Bea Cukai" class="w-full h-48 md:h-full object-cover md:col-span-1 bg-gray-200" loading="lazy" decoding="async" width="400" height="400">
+                        <div class="p-6 flex flex-col md:col-span-2">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="text-xl font-bold text-[#1A3A5D] pr-4">Konsultan Bea Cukai</h4>
+                                <span class="text-lg font-semibold text-[#CC3333] whitespace-nowrap">Rp 8-15jt</span>
+                            </div>
+                            <p class="text-gray-600 text-sm">Menyiapkan dokumentasi bea cukai dan memastikan pengiriman mematuhi semua regulasi untuk memfasilitasi impor dan ekspor barang.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section with Scroll Buttons -->
+        <section id="testimonials" class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-12 fade-up">
+                    <span class="text-[#CC3333] text-xl font-semibold uppercase">Testimoni</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-[#1A3A5D]">
+                        Kata Mereka Tentang Kami
+                    </h2>
+                    <p class="text-lg mt-2 text-gray-600 max-w-2xl mx-auto">
+                        Dukungan dari berbagai pihak menjadi semangat kami untuk terus menjadi yang terbaik.
+                    </p>
+                </div>
+                <div class="relative fade-up">
+                    <!-- Left Arrow Button -->
+                    <button id="scrollLeft" class="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-all duration-200 shadow-lg z-10 -ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <!-- Testimonial Carousel -->
+                    <div id="testimonial-list" class="flex gap-8 testimonial-carousel py-4">
+                        <!-- Content will be injected here by JavaScript -->
+                    </div>
+                    <!-- Right Arrow Button -->
+                    <button id="scrollRight" class="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-all duration-200 shadow-lg z-10 -mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call-to-Action (CTA) Section -->
+        <section id="cta" class="py-20 bg-[#CC3333] text-white">
+            <div class="container mx-auto px-4 max-w-4xl text-center fade-up">
+                <p class="text-lg font-normal mb-2">
+                    Sampaikan Sesuatu
+                </p>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-8">
+                    Berikan Komentar atau Masukan
+                </h2>
+                <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-xl">
+                    <form id="commentForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-left text-sm font-medium mb-1">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#CC3333] transition-all duration-200" placeholder="Nama Lengkap" required />
+                        </div>
+                        <div>
+                            <label for="comment" class="block text-left text-sm font-medium mb-1">Komentar atau Masukan</label>
+                            <textarea id="comment" name="comment" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#CC3333] transition-all duration-200" placeholder="Tulis komentar atau masukan Anda di sini..." required></textarea>
+                        </div>
+                        <button type="submit" id="submitButton" class="w-full px-8 py-3 bg-[#1A3A5D] text-white font-semibold rounded-full shadow-lg hover:bg-[#1A3A5D]/90 disabled:bg-[#1A3A5D]/50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1A3A5D] transition-all duration-200">
+                            Kirim Komentar
+                        </button>
+                        <p id="submitMessage" class="text-center mt-4"></p>
+                    </form>
+                </div>
+
+                <!-- Display Area for New Comments -->
+                <div id="comments-display-area" class="mt-12 text-left">
+                    <h3 class="text-2xl font-bold mb-6">Komentar Terbaru</h3>
+                    <div id="comments-list" class="space-y-6">
+                        <p class="text-gray-300 italic">Belum ada komentar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer - New version with two large columns -->
+        <footer class="bg-[#1a3a5d] text-white py-16">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <!-- Main grid for two large columns -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                    <!-- Left Column: Logo & Quick Links -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-up">
+                        <!-- Column 1: Logo & Description -->
+                        <div>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <img src="kul.png" alt="Logo SMKN 10 Semarang" class="w-10 h-10 square-full" />
+                                <h4 class="text-xl font-bold">SMKN 10 Semarang</h4>
+                            </div>
+                            <p class="text-sm font-light leading-relaxed max-w-xs">
+                                Mencetak generasi unggul yang siap kerja dan berwirausaha di bidang logistik dan lainnya.
+                            </p>
+                        </div>
+                        <!-- Column 2: Quick Links -->
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
+                            <ul class="space-y-2 text-sm font-light">
+                                <li><a href="#hero" class="hover:underline">Beranda</a></li>
+                                <li><a href="#why-choose-us" class="hover:underline">Tentang Jurusan</a></li>
+                                <li><a href="#facilities" class="hover:underline">Fasilitas</a></li>
+                                <li><a href="https://smk10semarang.sch.id/" target="_blank" class="hover:underline">Website Utama Sekolah</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Contact & Social Media -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-up">
+                        <!-- Column 3: Contact & Address -->
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4">Kontak & Alamat</h4>
+                            <ul class="space-y-3 text-sm font-light">
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin flex-shrink-0 mr-3 mt-1"><path d="M12 18.336 8.5 15.437a4.99 4.99 0 0 1-3.535-7.07L12 1.336l7.035 7.031a4.99 4.99 0 0 1-3.535 7.07L12 18.336z"/><path d="M12 8.336a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+                                    <a href="https://www.google.com/maps/place/SMK+Negeri+10+Semarang/@-6.9664242,110.4020143,17z/data=!3m1!4b1!4m6!3m5!1s0x2e70f4c8081bffaf:0xbb522f8061199b3!8m2!3d-6.9664242!4d110.4020143!16s%2Fg%2F1tdqx4mj?entry=ttu&g_ep=EgoyMDI1MDgxOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                                        <span>Jl. Kokrosono, Panggung Lor, Semarang</span>
+                                    </a>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone flex-shrink-0 mr-3 mt-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2.06c-2.61-.3-5.09-1.42-7.18-3.51-2.1-2.1-3.22-4.57-3.51-7.18A2 2 0 0 1 6.08 2h3a2 2 0 0 1 2 2v5.27a2 2 0 0 0 .27 1.12l.57.96a2 2 0 0 1-.27 2.47l-1.35 1.35a2 2 0 0 0-.27 2.47l.57.96A2 2 0 0 0 11.73 22h.54a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2h-1.5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1.5a2 2 0 0 0 2-2V2"/></svg>
+                                    <a href="tel:+62243540549" class="hover:underline">
+                                        <span>(024) 3540549<br/>(Informasi PPDB)</span>
+                                    </a>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail flex-shrink-0 mr-3 mt-1"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    <a href="mailto:info@smk10semarang.sch.id" class="hover:underline">info@smk10semarang.sch.id</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Column 4: Social Media -->
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4">Ikuti Kami</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://youtube.com/@smknegeri10semarangofficial?si=NG3xry7PtfrEciMV" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                                </a>
+                                <a href="https://www.tiktok.com/@smkn10semarang" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.84-.95-6.43-2.8-1.59-1.87-2.15-4.24-1.72-6.59.43-2.35 2.11-4.5 4.12-5.7.95-.55 2.02-.86 3.08-.98.01-2.54-.02-5.08.01-7.63.01-1.49.58-2.96 1.69-4.06.18-.18.35-.36.53-.5.07-.06.15-.12.23-.18.05-.04.1-.08.14-.13.07-.07.13-.14.2-.21.07-.07.14-.15.22-.22.05-.05.1-.09.15-.14.06-.06.12-.12.19-.17.06-.05.12-.1.18-.15.06-.05.12-.1.18-.14.07-.05.13-.09.2-.14.06-.04.12-.09.18-.13.07-.04.13-.09.2-.13.06-.04.12-.08.18-.12.07-.04.13-.08.2-.12.06-.03.12-.07.18-.1.07-.04.13-.07.2-.1.06-.03.12-.06.18-.09.07-.03.14-.06.2-.09.13-.06.26-.12.39-.18.07-.03.14-.06.2-.09.13-.06.26-.12.39-.18.06-.03.13-.05.19-.08.07-.03.13-.06.2-.08.07-.03.13-.06.2-.08.06-.03.13-.05.19-.08.07-.03.13-.05.2-.08.06-.02.12-.05.18-.07.07-.03.13-.05.2-.07.06-.02.12-.05.18-.07.07-.02.13-.05.2-.07.06-.02.12-.04.18-.06.07-.02.13-.04.2-.06.06-.02.12-.04.18-.06.07-.02.13-.04.2-.06.06-.02.12-.04.18-.05.07-.02.13-.04.2-.05.06-.02.12-.03.18-.05.07-.02.13-.03.2-.05.06-.01.12-.03.18-.04.07-.02.13-.03.2-.04.06-.01.12-.03.18-.04.07-.02.13-.03.2-.04.06-.01.12-.03.18-.04.07-.01.13-.03.2-.04.06-.01.12-.02.18-.03.07-.01.13-.03.2-.04.06-.01.12-.02.18-.03.07-.01.13-.02.2-.03.06-.01.12-.02.18-.03.07-.01.13-.02.2-.03.06-.01.12-.02.18-.02.07-.01.13-.02.2-.02.06-.01.12-.02.18-.02.07-.01.13-.02.2-.02.06-.01.12-.02.18-.02.07-.01.13-.01.2-.02.06-.01.12-.01.18-.02.07-.01.13-.01.2-.02.06-.01.12-.01.18-.01.07-.01.13-.01.2-.01.06-.01.12-.01.18-.01.07-.01.13-.01.2-.01.06,0,.12,0,.18,0,.07,0,.13,0,.2,0"/></svg>
+                                </a>
+                                <a href="https://www.instagram.com/smkn10semarang/" target="_blank" rel="noopener noreferrer" class="hover:text-gray-300 transition-colors duration-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.5" y1="6.5" y2="6.5"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="border-t border-white/20 mb-6" />
+
+                <div class="flex justify-center items-center text-sm text-gray-400">
+                    <div class="flex items-center space-x-2">
+                         <!-- Small logo at the bottom -->
+                        <span>© <span id="currentYear"></span> SMKN 10 Semarang.</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Data untuk bagian dinamis
+        const learnData = [
+            "Dasar-Dasar Manajemen Perkantoran dan Layanan Bisnis (MPLB).",
+            "Administrasi Pergudangan: Penerimaan, penyimpanan, penyiapan, pengeluaran barang.",
+            "Manajemen Distribusi & Delivery: Prosedur pengiriman efektif.",
+            "Regulasi Sektor Logistik & K3: Aturan dan keselamatan kerja.",
+            "Manajemen Pergudangan: Pengaturan administratif & praktis.",
+            "Bisnis Online: Pengelolaan Penjualan Digital dan Distribusi Produk.",
+            "Manajemen Distribusi: Penerimaan, pengolahan, pengemasan, penyerahan kiriman.",
+            "Freight Forwarding: Prosedur ekspor-impor.",
+            "Inovasi Kreativitas dan Kewirausahaan (IKK).",
+        ];
+
+        const testimonialData = [
+            { quote: "SMKN 10 Semarang terus berinovasi, adaptif dengan kebutuhan zaman. Jurusan ini adalah bukti nyata.", author: "Gatot Nurhadi", role: "Praktisi Industri", photo: "gatot.jpg" },
+            { quote: "Sebagai alumni, saya bangga. Jurusan baru Manajemen Logistik ini sangat dibutuhkan pada masa kini dan masa depan.", author: "Ribka", role: "Alumni", photo: "rib.jpg" },
+            { quote: "Maju terus smkn 10 Semarang", author: "Beny Legowo", role: "Wali Murid", photo: "ben.jpg" },
+            { quote: "Fasilitasnya sangat lengkap, anak-anak jadi lebih termotivasi untuk belajar", author: "Thoriq Allstar", role: "Murid SMKN 10", photo: "riq.jpg" },
+        ];
+        
+        const facilityData = [
+            { title: "Laboratorium Logistik Modern", image: "ms.jpg" },
+            { title: "Ruang Kelas Nyaman", image: "klas.jpg" },
+            { title: "Perpustakaan Lengkap", image: "pus.jpg" },
+            { title: "Lingkungan Sekolah Asri", image: "kn.jpeg" },
+            { title: "Area Praktik & Simulasi", image: "class.jpg" },
+            { title: "Akses Internet Cepat", image: "fi.jpeg" },
+        ];
+
+        // Fungsi untuk injeksi konten dinamis
+        function injectContent(data, containerId, templateCallback) {
+            const container = document.getElementById(containerId);
+            if (container) {
+                container.innerHTML = data.map(templateCallback).join('');
+            }
+        }
+
+        // Template untuk bagian "Apa yang Akan Kamu Pelajari"
+        const learnTemplate = (item) => `
+            <div class="flex items-start gap-3 p-6 bg-[#CC3333] rounded-2xl shadow-lg transform transition-transform duration-300 hover:scale-105 fade-up">
+                <div class="flex-shrink-0 p-2 rounded-full bg-white text-[#CC3333] shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg>
+                </div>
+                <p class="text-lg">${item}</p>
+            </div>
+        `;
+
+        // Template untuk bagian Testimonial
+        const testimonialTemplate = (item) => `
+            <div class="flex-shrink-0 testimonial-card bg-[#1A3A5D] p-6 rounded-2xl shadow-lg transform transition-all duration-300 scale-100">
+                <img src="${item.photo}" alt="${item.author}" class="w-16 h-16 rounded-full mb-4 mx-auto border-4 border-white shadow-md" />
+                <p class="text-gray-300 italic mb-4 text-center">"${item.quote}"</p>
+                <p class="font-semibold text-center text-white">- ${item.author}</p>
+                <p class="text-sm text-center text-gray-400">${item.role}</p>
+            </div>
+        `;
+
+        // Template untuk bagian Fasilitas
+        const facilityTemplate = (item) => `
+            <div class="relative rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 fade-up aspect-square">
+                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" />
+                <div class="absolute bottom-0 left-0 right-0 bg-[#1A3A5D]/50 text-white p-4">
+                    <p class="font-semibold">${item.title}</p>
+                </div>
+            </div>
+        `;
+
+        // Jalankan injeksi konten saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Page Transition ---
+            // 1. Fade in the page on load
+            document.body.classList.add('fade-in');
+
+            // 2. Handle fade-out on navigation
+            const pageLinks = document.querySelectorAll('a[href="profil.html"]');
+            pageLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const destination = this.href;
+                    // Prevent default navigation only if it's not opening in a new tab
+                    if (e.ctrlKey || e.metaKey || this.target === '_blank') {
+                        return;
+                    }
+                    e.preventDefault();
+                    document.body.classList.remove('fade-in');
+                    setTimeout(() => { window.location.href = destination; }, 400); // Match CSS transition duration
+                });
+            });
+            // --- End Page Transition ---
+
+            injectContent(learnData, 'learn-list', learnTemplate);
+            injectContent(testimonialData, 'testimonial-list', testimonialTemplate);
+            injectContent(facilityData, 'facility-list', facilityTemplate);
+
+            // Set tahun di footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const desktopMenu = document.getElementById('desktop-menu');
+
+            if (mobileMenuButton && mobileMenu && desktopMenu) {
+                const mobileNav = mobileMenu.querySelector('nav');
+                const desktopLinks = desktopMenu.querySelectorAll('a.nav-link');
+
+                // Clone desktop links to mobile menu
+                desktopLinks.forEach(link => {
+                    const newLink = link.cloneNode(true);
+                    // Add some padding and styling for mobile view
+                    newLink.classList.add('block', 'py-2', 'px-3', 'rounded-md', 'hover:bg-white/10');
+                    mobileNav.appendChild(newLink);
+                });
+
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    mobileMenuButton.classList.toggle('open');
+                });
+
+                // Close mobile menu when a link is clicked
+                mobileNav.addEventListener('click', (e) => {
+                    // Make sure the click is on an anchor tag
+                    if (e.target.tagName === 'A') {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.classList.remove('open');
+                    }
+                });
+            }
+
+            // Script untuk smooth scroll
+            const internalLinks = document.querySelectorAll('a[href^="#"]');
+            internalLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Infinite scroll with buttons for testimonials
+            const testimonialList = document.getElementById('testimonial-list');
+            const scrollLeftBtn = document.getElementById('scrollLeft');
+            const scrollRightBtn = document.getElementById('scrollRight');
+
+            if (testimonialList && scrollLeftBtn && scrollRightBtn) {
+                // Clone content for a seamless loop
+                testimonialList.innerHTML += testimonialList.innerHTML;
+                const cards = testimonialList.querySelectorAll('.testimonial-card');
+
+                function updateTestimonialScale() {
+                    const containerCenter = testimonialList.scrollLeft + testimonialList.offsetWidth / 2;
+                    let closestCard = null;
+                    let minDistance = Infinity;
+
+                    cards.forEach(card => {
+                        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                        const distance = Math.abs(containerCenter - cardCenter);
+                        
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestCard = card;
+                        }
+                    });
+
+                    cards.forEach(card => {
+                        if (card === closestCard) {
+                            card.classList.add('scale-110');
+                            card.classList.remove('scale-100');
+                        } else {
+                            card.classList.remove('scale-110');
+                            card.classList.add('scale-100');
+                        }
+                    });
+                }
+
+                // Initial check and update on scroll
+                setTimeout(updateTestimonialScale, 100); // Initial check after render
+                testimonialList.addEventListener('scroll', updateTestimonialScale);
+
+                const scrollAmount = 300; // Adjust scroll distance if needed
+
+                scrollRightBtn.addEventListener('click', () => {
+                    testimonialList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    setTimeout(() => {
+                        if (testimonialList.scrollLeft >= (testimonialList.scrollWidth / 2) - 5) {
+                            testimonialList.scrollLeft = 0;
+                        }
+                    }, 500); // Match smooth scroll duration
+                });
+
+                scrollLeftBtn.addEventListener('click', () => {
+                    if (testimonialList.scrollLeft === 0) {
+                        const newScrollPos = testimonialList.scrollWidth / 2;
+                        testimonialList.scrollLeft = newScrollPos;
+                    }
+                    testimonialList.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+            }
+
+            // Handle Form Submission
+            const form = document.getElementById('commentForm');
+            const submitButton = document.getElementById('submitButton');
+            const submitMessage = document.getElementById('submitMessage');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Mencegah form dikirim secara default
+
+                // Tampilkan pesan loading dan nonaktifkan tombol
+                submitButton.disabled = true;
+                submitButton.textContent = 'Mengirim...';
+                submitMessage.textContent = 'Mengirim data...';
+                submitMessage.className = 'text-center mt-4 text-[#1A3A5D]';
+
+                // Simulasikan pengiriman data ke server
+                setTimeout(() => {
+                    // Ambil data form
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        comment: document.getElementById('comment').value,
+                    };
+                    console.log('Form Data Submitted:', formData);
+
+                    // Tampilkan komentar di halaman
+                    const commentsList = document.getElementById('comments-list');
+                    const noCommentsMessage = commentsList.querySelector('p.italic');
+
+                    // Hapus pesan "Belum ada komentar" jika ada
+                    if (noCommentsMessage) {
+                        noCommentsMessage.remove();
+                    }
+
+                    // Buat elemen komentar baru
+                    const commentElement = document.createElement('div');
+                    commentElement.className = 'bg-white/10 p-4 rounded-lg animate-fade-in';
+                    commentElement.innerHTML = `
+                        <p class="font-semibold text-white">${formData.name}</p>
+                        <p class="text-gray-200 mt-1 whitespace-pre-wrap">${formData.comment}</p>
+                    `;
+                    commentsList.prepend(commentElement); // Tambahkan komentar baru di atas
+
+                    // Tampilkan pesan berhasil
+                    submitMessage.textContent = 'Komentar Anda berhasil dikirim! Terima kasih atas masukan Anda.';
+                    submitMessage.className = 'text-center mt-4 text-[#CC3333]';
+                    submitButton.textContent = 'Kirim Komentar';
+                    submitButton.disabled = false;
+                    form.reset(); // Reset form
+                }, 2000); // Penundaan 2 detik
+            });
+
+            // Intersection Observer for fade-up animation
+            const fadeUpElements = document.querySelectorAll('.fade-up');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.2 // Mengatur seberapa banyak elemen yang harus terlihat sebelum animasi dipicu
+            });
+
+            fadeUpElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
